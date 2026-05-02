@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Slop Bin · Hide LinkedIn feed slop with a bin cursor</title>
+    <meta
+      name="description"
+      content="Slop Bin is a humor-first Chrome extension for LinkedIn. Arm bin mode, click the post, the truck hauls it off. Free tier, one-time unlock for unlimited removals."
+    />
+    <meta name="theme-color" content="#1c1c16" />
+    <meta name="color-scheme" content="light" />
+    <meta name="robots" content="index,follow" />
+    <meta
+      name="keywords"
+      content="LinkedIn, Chrome extension, hide LinkedIn posts, feed cleaner, doomscroll, productivity, Slop Bin"
+    />
+
+    <!-- Canonical / social URLs are placeholders; swap to the live Vercel domain on deploy. -->
+    <link rel="canonical" href="https://slop-bin.vercel.app/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Slop Bin" />
+    <meta
+      property="og:title"
+      content="Slop Bin · Hide LinkedIn feed slop with a bin cursor"
+    />
+    <meta
+      property="og:description"
+      content="Humor-first Chrome extension for LinkedIn. Bin cursor, garbage truck, rubbish bag quip. Free tier; one-time $2.49 unlock for unlimited removals."
+    />
+    <meta property="og:url" content="https://slop-bin.vercel.app/" />
+    <meta property="og:image" content="https://slop-bin.vercel.app/assets/truck.png" />
+    <meta property="og:image:alt" content="Retro garbage truck illustration." />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Slop Bin · Hide LinkedIn feed slop with a bin cursor"
+    />
+    <meta
+      name="twitter:description"
+      content="Humor-first Chrome extension for LinkedIn. Click the slop, the truck hauls it. Free tier; one-time unlock."
+    />
+    <meta name="twitter:image" content="https://slop-bin.vercel.app/assets/truck.png" />
+
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="icon" type="image/png" href="./assets/truck.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Slop Bin",
+        "alternateName": "Slop Sanitation Service",
+        "applicationCategory": "BrowserApplication",
+        "operatingSystem": "Chrome",
+        "url": "https://slop-bin.vercel.app/",
+        "description": "Humor-first Chrome extension for LinkedIn. Arm Bin mode, click the post, the truck hauls it off. Free tier; one-time unlock for unlimited removals.",
+        "image": "https://slop-bin.vercel.app/assets/truck.png",
+        "offers": {
+          "@type": "Offer",
+          "price": "2.49",
+          "priceCurrency": "USD",
+          "url": "https://jordjegligorijevic.gumroad.com/l/slop-sanitation-service",
+          "availability": "https://schema.org/InStock"
+        },
+        "creator": {
+          "@type": "Organization",
+          "name": "Slop Sanitation Service"
+        }
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is this official LinkedIn?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Slop Bin is independent and not affiliated with LinkedIn. It only visually dismisses posts you click in your own browser."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does it read or send my feed posts to a server?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The extension only modifies what you see locally. The only outbound network call is to Gumroad over HTTPS when you activate a license key."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I redeem my license?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "After purchase, Gumroad emails you a license key. Open the Slop Bin popup, paste the key into the License field, and click Activate. Unlimited unlocks immediately."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I use the same key on more than one computer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Activate the same key in the popup on each device. Settings are local per browser, so it is a one-step activation per machine."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What about refunds?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Refunds are handled by Gumroad. If something is wrong with activation, email itdjordjegligorijevic@gmail.com and we will sort it out."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does it work on Reddit or X (Twitter)?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Not yet. v1 covers LinkedIn only. The architecture is ready for more sites; we ship one cleanly at a time."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div class="hazard-strip" aria-hidden="true"></div>
+
+    <main class="page">
+      <section id="hero" class="section section--hero" aria-labelledby="hero-h">
+        <div class="hero">
+          <div class="hero__copy">
+            <p class="hero__eyebrow">Slop Sanitation Service · LinkedIn v1</p>
+            <h1 id="hero-h" class="hero__title">
+              Take out the <span class="hero__hl">LinkedIn slop</span>.
+            </h1>
+            <p class="hero__sub">
+              A retro municipal cursor that hauls feed bait, hustle theatre, and humble-brags
+              out of your day. Built for job seekers and heavy LinkedIn users who would rather
+              scroll than be lectured.
+            </p>
+            <div class="hero__cta">
+              <a class="btn" href="#" data-cta="add-to-chrome" aria-disabled="true">
+                Add to Chrome
+              </a>
+              <a class="btn btn--secondary" href="#how">See how it works</a>
+            </div>
+          </div>
+          <figure class="hero__art" aria-hidden="true">
+            <img
+              src="./assets/truck.png"
+              alt=""
+              width="640"
+              height="320"
+              loading="eager"
+              decoding="async"
+            />
+          </figure>
+        </div>
+      </section>
+
+      <section id="problem" class="section" aria-labelledby="problem-h">
+        <p class="section__label">Why it exists</p>
+        <h2 id="problem-h" class="section__title">
+          Your feed is mostly unsolicited career advice.
+        </h2>
+        <p class="section__lead">
+          Job hunting is hard enough without scrolling past sixteen humble-brags before lunch.
+          We&rsquo;re not here to dunk on people. We&rsquo;re here to haul away the
+          <strong>post types</strong> that turn LinkedIn into a landfill.
+        </p>
+        <ul class="trope-grid" role="list">
+          <li class="trope">
+            <p class="trope__tag">Format · faux humility</p>
+            <p class="trope__line">&ldquo;I&rsquo;m humbled to announce&hellip;&rdquo;</p>
+          </li>
+          <li class="trope">
+            <p class="trope__tag">Format · engagement bait</p>
+            <p class="trope__line">&ldquo;Repost if you agree. 99% won&rsquo;t.&rdquo;</p>
+          </li>
+          <li class="trope">
+            <p class="trope__tag">Format · hustle theatre</p>
+            <p class="trope__line">&ldquo;7 brutal lessons from getting fired.&rdquo;</p>
+          </li>
+          <li class="trope">
+            <p class="trope__tag">Format · success cosplay</p>
+            <p class="trope__line">
+              &ldquo;Closed another deal at 5am. Dad of two. Coffee &gt; sleep.&rdquo;
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <section id="solution" class="section" aria-labelledby="solution-h">
+        <p class="section__label">What it does</p>
+        <h2 id="solution-h" class="section__title">Sanitation, not surveillance.</h2>
+        <p class="section__lead">
+          Three small parts, one absurd ritual. Aimed at LinkedIn first. Reddit and X
+          are on the route, not yet on the truck.
+        </p>
+        <ul class="feature-grid" role="list">
+          <li class="feature-card">
+            <figure class="feature-card__art" aria-hidden="true">
+              <img src="./assets/bin.png" alt="" width="120" height="120" />
+            </figure>
+            <h3>Bin cursor</h3>
+            <p>
+              Arm Bin mode in the popup. Your cursor becomes a rubbish bin on LinkedIn. Point
+              at a slop post, click once.
+            </p>
+          </li>
+          <li class="feature-card">
+            <figure class="feature-card__art" aria-hidden="true">
+              <img src="./assets/truck.png" alt="" width="200" height="100" />
+            </figure>
+            <h3>Garbage truck</h3>
+            <p>
+              A municipal truck rolls across the screen and hauls the post off your feed. The
+              algorithm doesn&rsquo;t see that.
+            </p>
+          </li>
+          <li class="feature-card">
+            <figure class="feature-card__art" aria-hidden="true">
+              <img src="./assets/trashbag.png" alt="" width="120" height="120" />
+            </figure>
+            <h3>Bag &amp; quip</h3>
+            <p>
+              A rubbish bag lands with a rotating one-liner so your brain gets the closure
+              that &ldquo;ignore&rdquo; never gives.
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <section id="how" class="section" aria-labelledby="how-h">
+        <p class="section__label">How it works</p>
+        <h2 id="how-h" class="section__title">Three steps. Then your feed has fewer landlords.</h2>
+        <ol class="steps" role="list">
+          <li class="step">
+            <span class="step__num" aria-hidden="true">01</span>
+            <h3 class="step__title">Install Slop Bin</h3>
+            <p>
+              Add the extension to Chrome. No account, no onboarding tour, no &ldquo;welcome
+              aboard&rdquo; email about your journey.
+            </p>
+          </li>
+          <li class="step">
+            <span class="step__num" aria-hidden="true">02</span>
+            <h3 class="step__title">Arm Bin mode</h3>
+            <p>
+              Open the popup and flip <strong>Bin mode</strong> on. Your cursor turns into a
+              rubbish bin on LinkedIn. Off-LinkedIn, you remain a normal person.
+            </p>
+          </li>
+          <li class="step">
+            <span class="step__num" aria-hidden="true">03</span>
+            <h3 class="step__title">Click the slop</h3>
+            <p>
+              Point at any post you&rsquo;re done with and click. The truck handles the haul.
+              Free for the first runs. One-time unlock for unlimited.
+            </p>
+          </li>
+        </ol>
+      </section>
+
+      <section id="trust" class="section" aria-labelledby="trust-h">
+        <p class="section__label">Privacy first</p>
+        <h2 id="trust-h" class="section__title">Local prefs. No tracking. No newsletter.</h2>
+        <ul class="trust-grid" role="list">
+          <li class="trust-card">
+            <h3>Stays on your device</h3>
+            <p>
+              Bin mode, your free-removal counter, and license state live in
+              <code>chrome.storage.local</code>. We don&rsquo;t send your reading habits anywhere.
+            </p>
+          </li>
+          <li class="trust-card">
+            <h3>License only over HTTPS</h3>
+            <p>
+              When you activate a key, the extension talks to <strong>Gumroad</strong> over
+              HTTPS to confirm the purchase. That&rsquo;s the only network call. No analytics
+              sidecar.
+            </p>
+          </li>
+          <li class="trust-card">
+            <h3>Not LinkedIn</h3>
+            <p>
+              Slop Bin is independent and <strong>not affiliated with LinkedIn</strong>. We
+              don&rsquo;t scrape posts or build a profile of what you read.
+            </p>
+          </li>
+        </ul>
+        <p class="trust-foot small">
+          Full details in the <a href="/privacy">privacy policy</a>.
+        </p>
+      </section>
+
+      <section id="pricing" class="section" aria-labelledby="pricing-h">
+        <p class="section__label">Pricing</p>
+        <h2 id="pricing-h" class="section__title">Try it free. Pay once if it earns its keep.</h2>
+        <div class="pricing-grid">
+          <article class="plan">
+            <p class="plan__tag">Free</p>
+            <p class="plan__price">
+              <span class="plan__price-num">5</span>
+              <span class="plan__price-unit">removals</span>
+            </p>
+            <ul class="plan__list" role="list">
+              <li>Bin cursor on LinkedIn</li>
+              <li>Truck animation + bag quip</li>
+              <li>No account, no card, no email</li>
+            </ul>
+            <a class="btn btn--secondary plan__cta" href="#" data-cta="add-to-chrome" aria-disabled="true">
+              Add to Chrome
+            </a>
+            <p class="plan__note small muted">Coming to the Chrome Web Store.</p>
+          </article>
+          <article class="plan plan--paid">
+            <p class="plan__tag">Unlimited / one-time</p>
+            <p class="plan__price">
+              <span class="plan__price-num">$2.49</span>
+              <span class="plan__price-unit">paid once</span>
+            </p>
+            <ul class="plan__list" role="list">
+              <li>Unlimited slop removals</li>
+              <li>License key activates the popup</li>
+              <li>Sold on Gumroad. Receipt + key by email</li>
+            </ul>
+            <a
+              class="btn plan__cta"
+              href="https://jordjegligorijevic.gumroad.com/l/slop-sanitation-service"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cta="gumroad"
+            >
+              Get unlimited &rarr;
+            </a>
+            <p class="plan__note small muted">No subscription. No renewal. Refunds via Gumroad.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-h">
+        <p class="section__label">FAQ</p>
+        <h2 id="faq-h" class="section__title">Common questions</h2>
+        <div class="faq-list">
+          <details class="faq">
+            <summary>Is this official LinkedIn?</summary>
+            <p>
+              No. Slop Bin is independent and <strong>not affiliated with LinkedIn</strong>.
+              We just visually dismiss posts you click in your own browser.
+            </p>
+          </details>
+          <details class="faq">
+            <summary>Does it read or send my feed posts to a server?</summary>
+            <p>
+              No. The extension only modifies what you see in your own browser. The only
+              outbound network call is to Gumroad over HTTPS when you activate a license key.
+            </p>
+          </details>
+          <details class="faq">
+            <summary>How do I redeem my license?</summary>
+            <p>
+              After purchase, Gumroad emails you a license key. Open the Slop Bin popup, paste
+              the key into the <strong>License</strong> field, and click <strong>Activate</strong>.
+              Unlimited unlocks immediately.
+            </p>
+          </details>
+          <details class="faq">
+            <summary>Can I use the same key on more than one computer?</summary>
+            <p>
+              Yes. Activate the same key in the popup on each device you use. Settings are
+              local per browser, so it&rsquo;s a one-step activation per machine.
+            </p>
+          </details>
+          <details class="faq">
+            <summary>Refunds?</summary>
+            <p>
+              Refunds are handled by Gumroad. If something&rsquo;s wrong with activation,
+              email <a href="mailto:itdjordjegligorijevic@gmail.com">itdjordjegligorijevic@gmail.com</a>
+              and we&rsquo;ll sort it out.
+            </p>
+          </details>
+          <details class="faq">
+            <summary>Reddit? X (Twitter)?</summary>
+            <p>
+              Not yet. v1 covers LinkedIn only. The architecture is ready for more sites; we
+              ship one cleanly at a time so the truck doesn&rsquo;t miss a stop.
+            </p>
+          </details>
+          <details class="faq">
+            <summary>Is bin mode just for laughs, or does it actually help?</summary>
+            <p>
+              Both. Visually removing slop reduces the friction of scrolling without
+              committing to a permanent &ldquo;mute&rdquo; or report. It&rsquo;s a tiny ritual
+              that breaks the doomscroll loop without lecturing you.
+            </p>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-foot">
+      <div class="site-foot__inner">
+        <p class="muted small site-foot__copy">
+          © <span id="year">2026</span> Slop Bin · Slop Sanitation Service.
+          Not affiliated with LinkedIn.
+        </p>
+        <nav class="site-foot__nav small" aria-label="Footer">
+          <a href="/privacy">Privacy</a>
+          <span aria-hidden="true">·</span>
+          <a
+            href="https://jordjegligorijevic.gumroad.com/l/slop-sanitation-service"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Gumroad</a
+          >
+          <span aria-hidden="true">·</span>
+          <a href="mailto:itdjordjegligorijevic@gmail.com">Contact</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = String(new Date().getFullYear());
+    </script>
+  </body>
+</html>

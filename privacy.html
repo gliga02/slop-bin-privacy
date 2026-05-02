@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Privacy Policy · Slop Bin</title>
+    <meta
+      name="description"
+      content="Slop Bin privacy policy: what stays on your device, license verification, and contact."
+    />
+    <meta name="theme-color" content="#1c1c16" />
+    <meta name="robots" content="index,follow" />
+
+    <!-- Canonical / social URLs are placeholders; swap to the live Vercel domain on deploy. -->
+    <link rel="canonical" href="https://slop-bin.vercel.app/privacy" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Slop Bin" />
+    <meta property="og:title" content="Privacy Policy · Slop Bin" />
+    <meta
+      property="og:description"
+      content="What Slop Bin stores locally, how license verification works with Gumroad, and how to contact us."
+    />
+    <meta property="og:url" content="https://slop-bin.vercel.app/privacy" />
+    <meta property="og:image" content="https://slop-bin.vercel.app/assets/truck.png" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Privacy Policy · Slop Bin" />
+    <meta
+      name="twitter:description"
+      content="Local prefs, Gumroad verification, no tracking."
+    />
+
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="icon" type="image/png" href="./assets/truck.png" />
+  </head>
+  <body class="privacy">
+    <div class="hazard-strip" aria-hidden="true"></div>
+
+    <main class="page page--prose">
+      <article id="policy">
+        <p class="policy__eyebrow">Slop Sanitation Service</p>
+        <h1>Privacy Policy</h1>
+        <p class="policy__updated"><strong>Last updated:</strong> 5 May 2026</p>
+
+        <p class="policy__intro">
+          This page explains what <strong>Slop Bin</strong> stores, what it sends over the
+          network, and how to contact us. It is written in plain language; this is not legal
+          advice. If anything is unclear, email us. The address is at the bottom.
+        </p>
+
+        <h2>What Slop Bin does</h2>
+        <p>
+          Slop Bin is a browser extension that lets you use a humorous &ldquo;bin mode&rdquo;
+          on supported websites (v1: LinkedIn) to visually dismiss feed posts you choose. It
+          is not a serious productivity or surveillance product, and it is not affiliated with
+          LinkedIn.
+        </p>
+
+        <h2>Data stored on your device</h2>
+        <p>
+          The extension stores information <strong>locally</strong> in your browser using
+          Chrome&rsquo;s extension storage (<code>chrome.storage.local</code>), including:
+        </p>
+        <ul>
+          <li>Whether <strong>Bin mode</strong> is turned on</li>
+          <li>How many <strong>free removals</strong> you have used</li>
+          <li>
+            Whether a <strong>license</strong> is activated and an optional opaque token
+            returned when you verify a purchase
+          </li>
+        </ul>
+        <p>We do not require an account to use the extension.</p>
+
+        <h2>License verification</h2>
+        <p>
+          If you enter a license key, the extension may send that key to <strong>Gumroad</strong>
+          (our license provider) over HTTPS to confirm your purchase. We do not process payments
+          inside the extension; checkout happens on Gumroad&rsquo;s site, governed by Gumroad&rsquo;s
+          own privacy practices.
+        </p>
+
+        <h2>What we do not do (v1)</h2>
+        <ul>
+          <li>We do <strong>not</strong> sell your personal data.</li>
+          <li>
+            We do <strong>not</strong> collect the full text of your feed posts on our servers
+            for analytics.
+          </li>
+          <li>
+            We do <strong>not</strong> run a backend that builds a profile of what you read,
+            beyond what Gumroad needs to validate a license key when you activate.
+          </li>
+        </ul>
+
+        <h2>Contact</h2>
+        <p>
+          For privacy questions:
+          <a href="mailto:itdjordjegligorijevic@gmail.com">itdjordjegligorijevic@gmail.com</a>
+        </p>
+
+        <h2>Changes</h2>
+        <p>
+          We may update this policy if the extension&rsquo;s behavior changes. The
+          &ldquo;Last updated&rdquo; date at the top will change when it does.
+        </p>
+      </article>
+    </main>
+
+    <footer class="site-foot">
+      <p class="muted small">
+        © <span id="year">2026</span> Slop Bin · Not affiliated with LinkedIn ·
+        <a href="/">Home</a>
+      </p>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = String(new Date().getFullYear());
+    </script>
+  </body>
+</html>
