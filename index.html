@@ -4,10 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Slop Bin · Hide LinkedIn feed slop with a bin cursor</title>
+    <title>Slop Bin - LinkedIn Feed Cleaner</title>
     <meta
       name="description"
-      content="Slop Bin is a humor-first Chrome extension for LinkedIn. Arm bin mode, click the post, the truck hauls it off. Free tier, one-time unlock for unlimited removals."
+      content="Slop Bin is a humor-first Chrome extension for LinkedIn. Use bin mode to clear feed slop, or unlock Focus Mode to stay on Jobs and block non-jobs distractions."
     />
     <meta name="theme-color" content="#1c1c16" />
     <meta name="color-scheme" content="light" />
@@ -24,11 +24,11 @@
     <meta property="og:site_name" content="Slop Bin" />
     <meta
       property="og:title"
-      content="Slop Bin · Hide LinkedIn feed slop with a bin cursor"
+      content="Slop Bin - LinkedIn Feed Cleaner"
     />
     <meta
       property="og:description"
-      content="Humor-first Chrome extension for LinkedIn. Bin cursor, garbage truck, rubbish bag quip. Free tier; one-time $2.49 unlock for unlimited removals."
+      content="Humor-first Chrome extension for LinkedIn. Bin cursor + truck animation, plus premium Focus Mode to keep Jobs accessible while blocking non-jobs distractions."
     />
     <meta property="og:url" content="https://slop-bin.vercel.app/" />
     <meta property="og:image" content="https://slop-bin.vercel.app/assets/truck.png" />
@@ -37,11 +37,11 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="Slop Bin · Hide LinkedIn feed slop with a bin cursor"
+      content="Slop Bin · Bin cursor + Focus Mode for LinkedIn Jobs"
     />
     <meta
       name="twitter:description"
-      content="Humor-first Chrome extension for LinkedIn. Click the slop, the truck hauls it. Free tier; one-time unlock."
+      content="Humor-first Chrome extension for LinkedIn. Clear slop with bin mode, then use Focus Mode to stay on Jobs and skip feed noise."
     />
     <meta name="twitter:image" content="https://slop-bin.vercel.app/assets/truck.png" />
 
@@ -57,7 +57,7 @@
         "applicationCategory": "BrowserApplication",
         "operatingSystem": "Chrome",
         "url": "https://slop-bin.vercel.app/",
-        "description": "Humor-first Chrome extension for LinkedIn. Arm Bin mode, click the post, the truck hauls it off. Free tier; one-time unlock for unlimited removals.",
+        "description": "Humor-first Chrome extension for LinkedIn. Use Bin mode to remove feed slop, or unlock premium Focus Mode to keep Jobs accessible while blocking non-jobs distractions.",
         "image": "https://slop-bin.vercel.app/assets/truck.png",
         "offers": {
           "@type": "Offer",
@@ -117,6 +117,14 @@
               "@type": "Answer",
               "text": "Refunds are handled by Gumroad. If something is wrong with activation, email itdjordjegligorijevic@gmail.com and we will sort it out."
             }
+          },
+          {
+            "@type": "Question",
+            "name": "Does Focus Mode block LinkedIn completely?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. It is designed to keep Jobs accessible while blocking distracting non-jobs areas."
+            }
           }
         ]
       }
@@ -148,7 +156,7 @@
               >
                 Add to Chrome
               </a>
-              <a class="btn btn--secondary" href="#how">See how it works</a>
+              <a class="btn btn--secondary" href="#solution">Stay on Jobs, skip the feed</a>
             </div>
           </div>
           <figure class="hero__art" aria-hidden="true">
@@ -232,6 +240,19 @@
             <p>
               A rubbish bag lands with a rotating one-liner so your brain gets the closure
               that &ldquo;ignore&rdquo; never gives.
+            </p>
+          </li>
+          <li class="feature-card">
+            <figure class="feature-card__art" aria-hidden="true">
+              <img src="./assets/bin.png" alt="" width="120" height="120" />
+            </figure>
+            <h3>Focus Mode (Premium): Jobs only, no Home feed noise</h3>
+            <p>
+              Blocks distracting LinkedIn non-jobs areas while job hunting, while keeping Jobs
+              routes available so you can keep applying without the extra mental drain.
+            </p>
+            <p class="small muted">
+              Focus Mode is optional and can be toggled anytime in the extension popup.
             </p>
           </li>
         </ul>
@@ -327,13 +348,14 @@
             <p class="plan__note small muted">Now live on the Chrome Web Store.</p>
           </article>
           <article class="plan plan--paid">
-            <p class="plan__tag">Unlimited / one-time</p>
+            <p class="plan__tag">Premium unlock / one-time</p>
             <p class="plan__price">
               <span class="plan__price-num">$2.49</span>
               <span class="plan__price-unit">paid once</span>
             </p>
             <ul class="plan__list" role="list">
-              <li>Unlimited slop removals</li>
+              <li>Unlimited bin-mode slop removals</li>
+              <li>Focus Mode: Jobs only, less non-jobs noise</li>
               <li>License key activates the popup</li>
               <li>Sold on Gumroad. Receipt + key by email</li>
             </ul>
@@ -344,7 +366,7 @@
               rel="noopener noreferrer"
               data-cta="gumroad"
             >
-              Get unlimited &rarr;
+              Unlock unlimited + Focus Mode &rarr;
             </a>
             <p class="plan__note small muted">No subscription. No renewal. Refunds via Gumroad.</p>
           </article>
@@ -390,6 +412,13 @@
               Refunds are handled by Gumroad. If something&rsquo;s wrong with activation,
               email <a href="mailto:itdjordjegligorijevic@gmail.com">itdjordjegligorijevic@gmail.com</a>
               and we&rsquo;ll sort it out.
+            </p>
+          </details>
+          <details class="faq">
+            <summary>Does Focus Mode block LinkedIn completely?</summary>
+            <p>
+              No. It is designed to keep Jobs accessible while blocking distracting non-jobs
+              areas.
             </p>
           </details>
           <details class="faq">
